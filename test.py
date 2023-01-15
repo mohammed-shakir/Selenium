@@ -3,6 +3,7 @@ from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.by import By
 import unittest
+import page
 
 class PythonOrgSearch(unittest.TestCase):
     def setUp(self):
@@ -11,6 +12,9 @@ class PythonOrgSearch(unittest.TestCase):
     
     def test_example(self):
         self.driver.implicitly_wait(3)
+
+        mainPage = page.MainPage(self.driver)
+        assert mainPage.is_title_matches(), "Selenium - Web Browser Automation"
 
         text_box = self.driver.find_element(By.NAME, "my-text")
         submit_button = self.driver.find_element(By.CSS_SELECTOR, "button")
@@ -25,7 +29,6 @@ class PythonOrgSearch(unittest.TestCase):
             print("Test passed")
         else:
             print("Test failed")
-
 
     def tearDown(self):
         self.driver.close()
